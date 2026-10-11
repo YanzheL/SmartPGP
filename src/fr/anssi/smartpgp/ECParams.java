@@ -21,6 +21,8 @@
 package fr.anssi.smartpgp;
 
 import javacard.framework.JCSystem;
+import javacard.framework.ISOException;
+import javacard.framework.ISO7816;
 import javacard.framework.Util;
 import javacard.security.KeyBuilder;
 import javacard.security.ECKey;
@@ -33,6 +35,7 @@ public final class ECParams {
     protected final byte[] oid;
     protected final byte[] field, a, b, g, r;
     protected final short k;
+    protected boolean isCurve25519;
 
     protected ECParams(final short nb_bits,
                        final byte[] oid,
@@ -41,7 +44,8 @@ public final class ECParams {
                        final byte[] b,
                        final byte[] g,
                        final byte[] r, /* n */
-                       final short k) /* h */ {
+                       final short k,
+                       boolean isCurve25519) /* h */ {
         this.nb_bits = nb_bits;
         this.oid = oid;
         this.field = field;
@@ -50,6 +54,7 @@ public final class ECParams {
         this.g = g;
         this.r = r;
         this.k = k;
+        this.isCurve25519 = isCurve25519;
     }
 
 
@@ -58,6 +63,9 @@ public final class ECParams {
     }
 
     protected final void setParams(final ECKey key) {
+        if (isCurve25519) {
+            ISOException.throwIt(ISO7816.SW_WRONG_DATA);
+        }
         key.setFieldFP(field, (short)0, (short)field.length);
         key.setA(a, (short)0, (short)a.length);
         key.setB(b, (short)0, (short)b.length);

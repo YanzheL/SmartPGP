@@ -30,6 +30,11 @@ import javacard.security.RandomData;
 import javacard.security.Signature;
 import javacardx.crypto.Cipher;
 
+import org.suut.javacard.pki.curve25519.Curve25519KeyAgreement;
+import org.suut.javacard.pki.curve25519.Curve25519Signature;
+import org.suut.javacard.pki.curve25519.Curve25519PublicKey;
+import org.suut.javacard.pki.curve25519.Curve25519KeyBuilder;
+
 public final class Common {
     protected final Cipher cipher_aes_cbc_nopad;
     protected final Cipher cipher_rsa_pkcs1;
@@ -39,8 +44,11 @@ public final class Common {
     protected final Signature sign_ecdsa_sha_256;
     protected final Signature sign_ecdsa_sha_384;
     protected final Signature sign_ecdsa_sha_512;
+    protected final Curve25519Signature sign_eddsa;
 
     protected final KeyAgreement ka_ec_dh;
+    protected final Curve25519KeyAgreement ka_xdh;
+    protected final Curve25519PublicKey ka_xdh_pub;
 
     protected final RandomData random;
 
@@ -53,10 +61,13 @@ public final class Common {
         sign_ecdsa_sha_256 = Signature.getInstance(Signature.ALG_ECDSA_SHA_256, false);
         sign_ecdsa_sha_384 = Signature.getInstance(Signature.ALG_ECDSA_SHA_384, false);
         sign_ecdsa_sha_512 = Signature.getInstance(Signature.ALG_ECDSA_SHA_512, false);
+        sign_eddsa = new Curve25519Signature();
 
         ka_ec_dh = KeyAgreement.getInstance(KeyAgreement.ALG_EC_SVDP_DH_PLAIN, false);
+        ka_xdh = new Curve25519KeyAgreement();
+        ka_xdh_pub = (Curve25519PublicKey)Curve25519KeyBuilder.buildKey(Curve25519KeyBuilder.ALG_TYPE_X25519_PUBLIC, JCSystem.MEMORY_TYPE_TRANSIENT_DESELECT);
 
-        random = RandomData.getInstance(RandomData.ALG_SECURE_RANDOM);
+        random = RandomData.getInstance(RandomData.ALG_TRNG);
     }
 
     protected static final void beginTransaction(final boolean isRegistering) {

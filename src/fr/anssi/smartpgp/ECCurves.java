@@ -33,7 +33,8 @@ public final class ECCurves {
                          ECConstants.ansix9p256r1_b,
                          ECConstants.ansix9p256r1_g,
                          ECConstants.ansix9p256r1_r,
-                         (short)1);
+                         (short)1,
+                         false);
 
         final ECParams ansix9p384r1 =
             new ECParams((short)384,
@@ -43,7 +44,8 @@ public final class ECCurves {
                          ECConstants.ansix9p384r1_b,
                          ECConstants.ansix9p384r1_g,
                          ECConstants.ansix9p384r1_r,
-                         (short)1);
+                         (short)1,
+                         false);
 
         final ECParams ansix9p521r1 =
             new ECParams((short)521,
@@ -53,7 +55,8 @@ public final class ECCurves {
                          ECConstants.ansix9p521r1_b,
                          ECConstants.ansix9p521r1_g,
                          ECConstants.ansix9p521r1_r,
-                         (short)1);
+                         (short)1,
+                         false);
 
         final ECParams brainpoolP256r1 =
             new ECParams((short)256,
@@ -63,7 +66,8 @@ public final class ECCurves {
                          ECConstants.brainpoolP256r1_b,
                          ECConstants.brainpoolP256r1_g,
                          ECConstants.brainpoolP256r1_r,
-                         (short)1);
+                         (short)1,
+                         false);
 
         final ECParams brainpoolP384r1 =
             new ECParams((short)384,
@@ -73,7 +77,8 @@ public final class ECCurves {
                          ECConstants.brainpoolP384r1_b,
                          ECConstants.brainpoolP384r1_g,
                          ECConstants.brainpoolP384r1_r,
-                         (short)1);
+                         (short)1,
+                         false);
 
         final ECParams brainpoolP512r1 =
             new ECParams((short)512,
@@ -83,7 +88,31 @@ public final class ECCurves {
                          ECConstants.brainpoolP512r1_b,
                          ECConstants.brainpoolP512r1_g,
                          ECConstants.brainpoolP512r1_r,
-                         (short)1);
+                         (short)1,
+                         false);
+
+
+        final ECParams x25519 =
+            new ECParams((short)256,
+                         ECConstants.x25519_oid,
+                         null,
+                         null,
+                         null,
+                         null,
+                         null,
+                         (short)0,
+                         true);
+
+        final ECParams ed25519 =
+            new ECParams((short)256,
+                         ECConstants.ed25519_oid,
+                         null,
+                         null,
+                         null,
+                         null,
+                         null,
+                         (short)0,
+                         true);
 
         curves = new ECParams[]{
             ansix9p256r1,
@@ -91,7 +120,9 @@ public final class ECCurves {
             ansix9p521r1,
             brainpoolP256r1,
             brainpoolP384r1,
-            brainpoolP512r1
+            brainpoolP512r1,
+            x25519,
+            ed25519
         };
     }
 

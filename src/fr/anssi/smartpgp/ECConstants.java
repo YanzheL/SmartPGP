@@ -22,6 +22,18 @@ package fr.anssi.smartpgp;
 
 public final class ECConstants {
 
+    protected static final byte[] x25519_oid = {
+        (byte)0x2B, (byte)0x06, (byte)0x01, (byte)0x04,
+        (byte)0x01, (byte)0x97, (byte)0x55, (byte)0x01,
+        (byte)0x05, (byte)0x01
+    };
+
+    protected static final byte[] ed25519_oid = {
+        (byte)0x2B, (byte)0x06, (byte)0x01, (byte)0x04,
+        (byte)0x01, (byte)0xDA, (byte)0x47, (byte)0x0F,
+        (byte)0x01
+     };
+
     protected static final byte[] ansix9p256r1_oid =
     { (byte)0x2A, (byte)0x86, (byte)0x48, (byte)0xCE, (byte)0x3D, (byte)0x03, (byte)0x01, (byte)0x07 };
 
