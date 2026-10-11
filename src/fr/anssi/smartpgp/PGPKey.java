@@ -59,6 +59,7 @@ public final class PGPKey {
     protected final boolean is_secure_messaging_key;
 
     private boolean has_been_generated;
+    private byte keyIndex;
 
     private KeyPair keys;
     private Curve25519PublicKey cv25519public;
@@ -66,7 +67,7 @@ public final class PGPKey {
     boolean isEd25519 = false;
     boolean isX25519 = false;
 
-    protected PGPKey(final boolean for_secure_messaging) {
+    protected PGPKey(final boolean for_secure_messaging, byte keyIndex) {
 
         is_secure_messaging_key = for_secure_messaging;
 
@@ -139,10 +140,31 @@ public final class PGPKey {
                                     (short)Constants.ALGORITHM_ATTRIBUTES_DEFAULT_SECURE_MESSAGING.length);
             attributes_length = (byte)Constants.ALGORITHM_ATTRIBUTES_DEFAULT_SECURE_MESSAGING.length;
         } else {
-            Util.arrayCopyNonAtomic(Constants.ALGORITHM_ATTRIBUTES_DEFAULT, (short)0,
-                                    attributes, (short)0,
-                                    (short)Constants.ALGORITHM_ATTRIBUTES_DEFAULT.length);
-            attributes_length = (byte)Constants.ALGORITHM_ATTRIBUTES_DEFAULT.length;
+            switch (keyIndex) {
+            case Constants.REGISTERING_KEY_SIGN:
+                Util.arrayCopyNonAtomic(Constants.ALGORITHM_ATTRIBUTES_SIGN_DEFAULT, (short)0,
+                    attributes, (short)0,
+                    (short)Constants.ALGORITHM_ATTRIBUTES_SIGN_DEFAULT.length);
+                attributes_length = (byte)Constants.ALGORITHM_ATTRIBUTES_SIGN_DEFAULT.length;
+                break;
+
+            case Constants.REGISTERING_KEY_ENCR:
+                Util.arrayCopyNonAtomic(Constants.ALGORITHM_ATTRIBUTES_ENCR_DEFAULT, (short)0,
+                    attributes, (short)0,
+                    (short)Constants.ALGORITHM_ATTRIBUTES_ENCR_DEFAULT.length);
+                attributes_length = (byte)Constants.ALGORITHM_ATTRIBUTES_ENCR_DEFAULT.length;
+                break;
+
+            case Constants.REGISTERING_KEY_AUTH:
+                Util.arrayCopyNonAtomic(Constants.ALGORITHM_ATTRIBUTES_AUTH_DEFAULT, (short)0,
+                    attributes, (short)0,
+                    (short)Constants.ALGORITHM_ATTRIBUTES_AUTH_DEFAULT.length);
+                attributes_length = (byte)Constants.ALGORITHM_ATTRIBUTES_AUTH_DEFAULT.length;
+                break;
+
+            default:
+                ISOException.throwIt(ISO7816.SW_WRONG_DATA);
+            }
         }
         Common.commitTransaction(isRegistering);
     }
@@ -1002,7 +1024,7 @@ public final class PGPKey {
         return 0;
     }
 
-    protected final void initKeyAgreement(final KeyAgreement ka) {
+    protected final void initKeyAgreement(final KeyAgreement ka) { // only used for SM
         if(!isInitialized()) {
             ISOException.throwIt(ISO7816.SW_CONDITIONS_NOT_SATISFIED);
             return;

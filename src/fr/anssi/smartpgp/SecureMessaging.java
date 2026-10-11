@@ -63,7 +63,7 @@ public final class SecureMessaging {
         digest = MessageDigest.getInstance(MessageDigest.ALG_SHA_256, false);
         key_agreement = KeyAgreement.getInstance(KeyAgreement.ALG_EC_SVDP_DH_PLAIN, false);
 
-        static_key = new PGPKey(true);
+        static_key = new PGPKey(true, Constants.REGISTERING_KEY_SM);
 
         cipher = Cipher.getInstance(Cipher.ALG_AES_BLOCK_128_CBC_NOPAD, false);
         senc = null;

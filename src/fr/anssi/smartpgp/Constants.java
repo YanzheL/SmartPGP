@@ -217,11 +217,27 @@ public final class Constants {
     protected static final byte ALGORITHM_ATTRIBUTES_MIN_LENGTH = 6;
     protected static final byte ALGORITHM_ATTRIBUTES_MAX_LENGTH = 13;
 
-    protected static final byte[] ALGORITHM_ATTRIBUTES_DEFAULT = {
-        (byte)0x01, /* RSA */
-        (byte)0x08, (byte)0x00, /* 2048 bits modulus */
-        (byte)0x00, (byte)0x11, /* 65537 = 17 bits public exponent */
-        (byte)0x03 /* crt form with modulus */
+    protected static final byte REGISTERING_KEY_SIGN = 0;
+    protected static final byte REGISTERING_KEY_ENCR = 1;
+    protected static final byte REGISTERING_KEY_AUTH = 2;
+    protected static final byte REGISTERING_KEY_SM = 3;
+
+    protected static final byte[] ALGORITHM_ATTRIBUTES_SIGN_DEFAULT = {
+        0x16, /* Edwards */
+        0x2B, 0x06, 0x01, 0x04, 0x01, (byte)0xDA, 0x47, 0x0F, 0x01, /* Ed25519 */
+        (byte)0xFF
+    };
+
+    protected static final byte[] ALGORITHM_ATTRIBUTES_ENCR_DEFAULT = {
+        (byte)0x12, /* ECDH */
+        0x2B, 0x06, 0x01, 0x04, 0x01, (byte)0x97, 0x55, 0x01, 0x05, 0x01, /* X25519 */
+        (byte)0xFF
+    };
+
+    protected static final byte[] ALGORITHM_ATTRIBUTES_AUTH_DEFAULT = {
+        0x16, /* Edwards */
+        0x2B, 0x06, 0x01, 0x04, 0x01, (byte)0xDA, 0x47, 0x0F, 0x01, /* Ed25519 */
+        (byte)0xFF
     };
 
     protected static final byte[] ALGORITHM_ATTRIBUTES_DEFAULT_SECURE_MESSAGING = {
