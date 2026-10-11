@@ -4,3 +4,4 @@
 [submodule "Curve25519-JavaCard"]
 	path = Curve25519-JavaCard
 	url = ../../suut/Curve25519-JavaCard.git
+	ignore = dirty

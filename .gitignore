@@ -4,3 +4,4 @@ SmartPGPApplet.cap
 bin/
 ext/
 *.patch
+!/.github/workflows/*.patch
