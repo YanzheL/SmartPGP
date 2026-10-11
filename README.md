@@ -8,6 +8,10 @@ previous version is the support of elliptic curve cryptography with
 several existing curves (NIST P-256, NIST P-384, NIST P-521, brainpool
 p256r1, brainpool p384r1 and brainpool p512r1).
 
+## Fork differences
+
+This fork adds support for the ed25519 and cv25519 key types, as well
+as extended length APDU support and RSA 4096 key import support.
 
 ## Features
 
@@ -17,7 +21,8 @@ of them depend on underlying hardware support and available
 
 - RSA (>= 2048 bits modulus, 17 bits exponent) and ECC (NIST P-256,
   NIST P-384, NIST P-521, brainpool p256r1, brainpool p384r1 and
-  brainpool p512r1) for signature, encryption and authentication;
+  brainpool p512r1, X25519, Ed25519) for signature, encryption and
+  authentication;
 
 - On-board key generation and external private key import;
 
