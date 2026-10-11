@@ -11,7 +11,7 @@ p256r1, brainpool p384r1 and brainpool p512r1).
 ## Fork differences
 
 This fork adds support for the ed25519 and cv25519 key types, as well
-as extended length APDU support and RSA 4096 key import support.
+as RSA 4096 key import support.
 
 ## Features
 
