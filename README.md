@@ -49,7 +49,7 @@ The SmartPGP applet is configured with the following default values:
 
 - No PUK (a.k.a. resetting code) is defined;
 
-- RSA 2048 bits for PGP keys;
+- ed25519 for PGP key 1 and 3, cv25519 for PGP key 2
 
 - NIST P-256 for the secure messaging key.
 
@@ -139,7 +139,7 @@ The repository contains several directories:
 - JavaCard Development Kit 3.0.4 (or above) from
   [Oracle website](http://www.oracle.com/technetwork/java/embedded/javacard/downloads/index.html);
 
-- A device compliant with JavaCard 3.0.4 (or above) with enough
+- A device compliant with JavaCard 3.0.5 (or above) with enough
   available resources to hold the code (approximately 23 kB of
   non-volatile memory), persistent data (approximately 10 kB of
   non-volatile memory) and volatile data (approximately 2 kB of RAM).
@@ -151,9 +151,8 @@ The repository contains several directories:
 ## Importing RSA keys above 2048 bits (3072 or 4096 bits)
 
 The size of the internal buffer is set by default to a value that
-permits to import RSA 2048 bits. If your card is able to deal with RSA
-keys of 3072 or 4096 bits and you want to be able to import such keys,
-then you need to adjust the size of this buffer:
+permits to import RSA 4096 bits. If you want to converse memory
+you need to adjust the value:
 
 - for RSA 2048 bits, `Constants.INTERNAL_BUFFER_MAX_LENGTH` must be at
   least `(short)0x3b0`;
