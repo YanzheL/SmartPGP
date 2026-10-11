@@ -84,14 +84,27 @@ public final class PGPKey {
         attributes = new byte[Constants.ALGORITHM_ATTRIBUTES_MAX_LENGTH];
         attributes_length = 0;
 
+        this.keyIndex = keyIndex;
         reset(true);
     }
 
     private final void resetKeys(final boolean isRegistering) {
-        if(keys != null) {
-            keys.getPrivate().clearKey();
-            keys.getPublic().clearKey();
-            keys = null;
+        if (isX25519 || isEd25519) {
+            cv25519private.clearKey();
+            cv25519private = null;
+            cv25519public.clearKey();
+            cv25519public = null;
+            isX25519 = false;
+            isEd25519 = false;
+            if(!isRegistering) {
+                Common.requestDeletion();
+            }
+        } else {
+            if(keys != null) {
+                keys.getPrivate().clearKey();
+                keys.getPublic().clearKey();
+                keys = null;
+            }
             if(!isRegistering) {
                 Common.requestDeletion();
             }
