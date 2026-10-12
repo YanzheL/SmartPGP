@@ -804,10 +804,6 @@ public final class PGPKey {
             if (isEd25519) {
                 Curve25519Signature sig = common.sign_eddsa;
 
-                if (lc != MessageDigest.LENGTH_SHA_512) {
-                    ISOException.throwIt(ISO7816.SW_CONDITIONS_NOT_SATISFIED);
-                }
-
                 sig_size = sig.sign(cv25519private, buf, (short)0, lc, buf, lc);
                 off = Util.arrayCopyNonAtomic(buf, lc,
                                               buf, (short)0, sig_size);
