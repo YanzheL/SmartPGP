@@ -217,11 +217,6 @@ public final class Constants {
     protected static final byte ALGORITHM_ATTRIBUTES_MIN_LENGTH = 6;
     protected static final byte ALGORITHM_ATTRIBUTES_MAX_LENGTH = 13;
 
-    protected static final byte REGISTERING_KEY_SIGN = 0;
-    protected static final byte REGISTERING_KEY_ENCR = 1;
-    protected static final byte REGISTERING_KEY_AUTH = 2;
-    protected static final byte REGISTERING_KEY_SM = 3;
-
     protected static final byte[] ALGORITHM_ATTRIBUTES_SIGN_DEFAULT = {
         0x16, /* Edwards */
         0x2B, 0x06, 0x01, 0x04, 0x01, (byte)0xDA, 0x47, 0x0F, 0x01, /* Ed25519 */

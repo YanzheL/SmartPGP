@@ -141,21 +141,21 @@ public final class PGPKey {
             attributes_length = (byte)Constants.ALGORITHM_ATTRIBUTES_DEFAULT_SECURE_MESSAGING.length;
         } else {
             switch (keyIndex) {
-            case Constants.REGISTERING_KEY_SIGN:
+            case Persistent.PGP_KEYS_OFFSET_SIG:
                 Util.arrayCopyNonAtomic(Constants.ALGORITHM_ATTRIBUTES_SIGN_DEFAULT, (short)0,
                     attributes, (short)0,
                     (short)Constants.ALGORITHM_ATTRIBUTES_SIGN_DEFAULT.length);
                 attributes_length = (byte)Constants.ALGORITHM_ATTRIBUTES_SIGN_DEFAULT.length;
                 break;
 
-            case Constants.REGISTERING_KEY_ENCR:
+            case Persistent.PGP_KEYS_OFFSET_DEC:
                 Util.arrayCopyNonAtomic(Constants.ALGORITHM_ATTRIBUTES_ENCR_DEFAULT, (short)0,
                     attributes, (short)0,
                     (short)Constants.ALGORITHM_ATTRIBUTES_ENCR_DEFAULT.length);
                 attributes_length = (byte)Constants.ALGORITHM_ATTRIBUTES_ENCR_DEFAULT.length;
                 break;
 
-            case Constants.REGISTERING_KEY_AUTH:
+            case Persistent.PGP_KEYS_OFFSET_AUT:
                 Util.arrayCopyNonAtomic(Constants.ALGORITHM_ATTRIBUTES_AUTH_DEFAULT, (short)0,
                     attributes, (short)0,
                     (short)Constants.ALGORITHM_ATTRIBUTES_AUTH_DEFAULT.length);

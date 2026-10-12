@@ -202,8 +202,11 @@ public final class Common {
         for(short i = 0; i < ec.curves.length; ++i) {
             buf[off++] = key_tag;
             buf[off++] = (byte)(1 + ec.curves[i].oid.length + 1); /* len */
-            if(is_dec) buf[off++] = (byte)0x12; /* ECDH */
-            else buf[off++] = (byte)0x13; /* ECDSA */
+            if (is_dec) {
+                buf[off++] = (byte)0x12; /* ECDH */
+            } else if (ec.curves[i].isCurve25519) {
+                buf[off++] = (byte)0x16; /* Edwards */
+            } else buf[off++] = (byte)0x13; /* ECDSA */
             off = Util.arrayCopyNonAtomic(ec.curves[i].oid, (short)0,
                                           buf, off,
                                           (short)ec.curves[i].oid.length);
