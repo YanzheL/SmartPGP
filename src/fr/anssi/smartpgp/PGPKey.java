@@ -1001,6 +1001,8 @@ public final class PGPKey {
                 common.ka_xdh_pub.setW(buf, off, (short)(lc - off));
                 final short len = common.ka_xdh.keyExchange(cv25519private, common.ka_xdh_pub, buf, lc);
                 off = Util.arrayCopyNonAtomic(buf, lc, buf, (short)0, len);
+
+                Util.arrayFillNonAtomic(buf, lc, len, (byte)0);
             } else {
                 priv = keys.getPrivate();
                 common.ka_ec_dh.init(priv);
